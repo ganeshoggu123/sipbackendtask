@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "e762f283-070a-46cf-8568-b007d54b8478",
+    "name": "sip",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38535805",
+    "_collection_link": "https://go.postman.co/collection/38535805-e762f283-070a-46cf-8568-b007d54b8478?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"ganeshoggu@gmail.com\",\r\n    \"password\":\"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/investor/login",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "investor",
+            "login"
+          ]
+        }
+      },
+      "response": [{
+    "message": "Login Successful",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTU1NTI5LCJleHAiOjE3Nzg1ODc1Mjl9.JwRNpevZ5XwevrBML3jIxqoyByFznDiov9H9B1mukUQ"
+}]
+    },
+    {
+      "name": "logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"ganeshoggu@gmail.com\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/investor/logout",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "investor",
+            "logout"
+          ]
+        }
+      },
+      "response": [{
+    "message": "Logout Successful"
+}]
+    },
+    {
+      "name": "createInvestor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaEBnbWFpbC5jb20iLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3NzgwNjQ1MTgsImV4cCI6MTc3ODQ5NjUxOH0.AETO7u-AykIpG_g3Rt8hj35DAaSN9MBDfbyNuL6p_BM",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"investor_id\": \"INV006\",\r\n    \"first_name\": \"Abhi\",\r\n    \"middle_name\": \"Kumar\",\r\n    \"last_name\": \"Reddy\",\r\n    \"pancard_no\": \"ABCDE6789X\",\r\n    \"aadhaar_no\": \"999988887777\",\r\n    \"date_of_birth\": \"2002-05-10\",\r\n    \"gender\": \"Male\",\r\n    \"occupation\": \"Developer\",\r\n    \"passport_no\": \"P1234567\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/investor",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "investor"
+          ]
+        }
+      },
+      "response": [{
+    "message": "Investor created successfully"
+}]
+    },
+    {
+      "name": "get investor by id",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [{
+    "investor_id": "INV001",
+    "first_name": "Ganesh",
+    "middle_name": "Kumar",
+    "last_name": "Oggu",
+    "pancard_no": "ABCDE1234F",
+    "aadhaar_no": "123456789012",
+    "passport_no": "M1234567",
+    "date_of_birth": "2001-05-15",
+    "gender": "Male",
+    "occupation": "Software Engineer"
+}]
+    },
+    {
+      "name": "investor holdings by id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"ganesh@gmail.com\",\r\n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/investor/INV001/holdings",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "investor",
+            "INV001",
+            "holdings"
+          ]
+        }
+      },
+      "response": [ {
+        "fund_name": "SBI Bluechip Fund",
+        "total_units": 76.42,
+        "nav_value": 65.4321,
+        "current_value": 5000.321082
+    }]
+    },
+    {
+      "name": "calculate nav",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [{
+    "net_worth": 5000.321082
+}]
+    },
+    {
+      "name": "add Fund",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"fund_id\": \"F007\",\r\n  \"amc_id\": \"AMC01\",\r\n  \"fund_name\": \"SBI Bluechip Fund\",\r\n  \"fund_category\": \"Equity\",\r\n  \"fund_type\": \"Large Cap\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/funds",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "funds"
+          ]
+        }
+      },
+      "response": [{
+    "message": "Fund created successfully"
+}]
+    },
+    {
+      "name": "get All funds",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [ {
+        "fund_id": "F001",
+        "amc_id": "AMC01",
+        "fund_name": "SBI Bluechip Fund",
+        "fund_category": "Equity",
+        "fund_type": "Large Cap"
+    },
+    {
+        "fund_id": "F002",
+        "amc_id": "AMC02",
+        "fund_name": "HDFC Balanced Fund",
+        "fund_category": "Hybrid",
+        "fund_type": "Balanced"
+    },
+    {
+        "fund_id": "F003",
+        "amc_id": "AMC03",
+        "fund_name": "ICICI Technology Fund",
+        "fund_category": "Equity",
+        "fund_type": "Sectoral"
+    },
+    {
+        "fund_id": "F004",
+        "amc_id": "AMC04",
+        "fund_name": "Axis Midcap Fund",
+        "fund_category": "Equity",
+        "fund_type": "Mid Cap"
+    },
+    {
+        "fund_id": "F005",
+        "amc_id": "AMC05",
+        "fund_name": "Nippon Small Cap Fund",
+        "fund_category": "Equity",
+        "fund_type": "Small Cap"
+    },
+    {
+        "fund_id": "F007",
+        "amc_id": "AMC01",
+        "fund_name": "SBI Bluechip Fund",
+        "fund_category": "Equity",
+        "fund_type": "Large Cap"
+    },
+    {
+        "fund_id": "F008",
+        "amc_id": "AMC01",
+        "fund_name": "SBI Bluechip Fund",
+        "fund_category": "Equity",
+        "fund_type": "Large Cap"
+    }]
+    },
+    {
+      "name": "update nav",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nav_value\": 78.4567,\r\n  \"nav_date\": \"2026-05-07\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/funds/F007/nav",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "funds",
+            "F007",
+            "nav"
+          ]
+        }
+      },
+      "response": [{
+    "message": "NAV updated successfully"
+}]
+    },
+    {
+      "name": "create sip",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sip_id\": \"SIP005\",\r\n  \"portfolio_id\": \"P005\",\r\n  \"fund_id\": \"F005\",\r\n  \"sip_amount\": 3500,\r\n  \"sip_date\": 25,\r\n  \"start_date\": \"2026-01-25\",\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/sips",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "sips"
+          ]
+        }
+      },
+      "response": [{
+    "message": "SIP created successfully"
+}]
+    },
+    {
+      "name": "get sip by id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "localhost:3000/api/sips/SIP001",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "sips",
+            "SIP001"
+          ]
+        }
+      },
+      "response": [{
+    "sip_id": "SIP001",
+    "portfolio_id": "P001",
+    "fund_id": "F001",
+    "sip_amount": 5000,
+    "sip_date": 5,
+    "start_date": "2026-01-05",
+    "status": "ACTIVE"
+}]
+    },
+    {
+      "name": "process sip",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbmVzaG9nZ3VAZ21haWwuY29tIiwicm9sZSI6ImludmVzdG9yIiwiaWF0IjoxNzc4MTQwMDE4LCJleHAiOjE3Nzg1NzIwMTh9.BTq95qZBe8NhLEn4i2EZgmda6rUE8-rIyU4tU7kqk0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sip_id\": \"SIP001\",\r\n  \"portfolio_id\": \"P001\",\r\n  \"fund_id\": \"F001\",\r\n  \"sip_amount\": 5000,\r\n  \"sip_date\": 5,\r\n  \"start_date\": \"2026-05-07\",\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/sips/SIP001/process",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "sips",
+            "SIP001",
+            "process"
+          ]
+        }
+      },
+      "response": [{
+    "message": "SIP processed successfully"
+}]
+    },
+    {
+      "name": "transaction by id",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [{
+        "transaction_id": "TXN1778145983",
+        "sip_id": "SIP002",
+        "fund_id": "F002",
+        "transaction_amount": 3000,
+        "nav_at_purchase": 42.1234,
+        "units_allocated": 71.21932227692922,
+        "transaction_date": "2026-05-07"
+    },
+    {
+        "transaction_id": "TXN1778147219",
+        "sip_id": "SIP002",
+        "fund_id": "F002",
+        "transaction_amount": 3000,
+        "nav_at_purchase": 42.1234,
+        "units_allocated": 71.21932227692922,
+        "transaction_date": "2026-05-07"
+    },
+    {
+        "transaction_id": "TXN1778155888",
+        "sip_id": "SIP002",
+        "fund_id": "F002",
+        "transaction_amount": 3000,
+        "nav_at_purchase": 42.1234,
+        "units_allocated": 71.21932227692922,
+        "transaction_date": "2026-05-07"
+    }]
+    }
+  ]
+}
