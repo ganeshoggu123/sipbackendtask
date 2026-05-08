@@ -1,4 +1,4 @@
-const db = require("../utility/dbManager");
+const client = require("../pgManager");
 const users = [
     {
         email:"ganeshoggu@gmail.com",
@@ -31,10 +31,10 @@ const logoutUser = (email,token) =>{
     return false
 }
 
-
 const createInvestor = (investorData, callback) => {
-    const query = `
-        INSERT INTO investor (
+
+    client.query(
+        `INSERT INTO investor (
             investor_id,
             first_name,
             middle_name,
@@ -46,25 +46,32 @@ const createInvestor = (investorData, callback) => {
             occupation,
             passport_no
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+        VALUES (
+            '${investorData.investor_id}',
+            '${investorData.first_name}',
+            '${investorData.middle_name}',
+            '${investorData.last_name}',
+            '${investorData.pancard_no}',
+            '${investorData.aadhaar_no}',
+            '${investorData.date_of_birth}',
+            '${investorData.gender}',
+            '${investorData.occupation}',
+            '${investorData.passport_no}'
+        )
+        RETURNING *;`,
 
-    db.run(
-        query,
-        [
-            investorData.investor_id,
-            investorData.first_name,
-            investorData.middle_name,
-            investorData.last_name,
-            investorData.pancard_no,
-            investorData.aadhaar_no,
-            investorData.date_of_birth,
-            investorData.gender,
-            investorData.occupation,
-            investorData.passport_no
-        ],
-        callback
+        (error, result) => {
+
+            if (error) {
+                callback(error, null);
+            } else {
+                console.log("Investor Created Successfully");
+                callback(null, result.rows);
+            }
+
+        }
     );
+
 };
 
 module.exports = {
@@ -73,17 +80,30 @@ module.exports = {
 
 
 const getInvestorById = (investorId, callback) => {
-    const query = `
-        SELECT * 
-        FROM investor
-        WHERE investor_id = ?
-    `;
-    db.get(query, [investorId], callback);
+
+    client.query(
+        `SELECT * 
+         FROM investor
+         WHERE investor_id = '${investorId}';`,
+         
+        (error, result) => {
+
+            if (error) {
+                callback(error, null);
+            } else {
+                console.log("Investor Fetched Successfully");
+                callback(null, result.rows);
+            }
+
+        }
+    );
+
 };
 
 const getInvestorHoldings = (investorId, callback) => {
-    const query = `
-        SELECT 
+
+    client.query(
+        `SELECT 
             mf.fund_name,
             ph.total_units,
             nh.nav_value,
@@ -95,23 +115,45 @@ const getInvestorHoldings = (investorId, callback) => {
             ON ph.fund_id = mf.fund_id
         JOIN nav_history nh
             ON mf.fund_id = nh.fund_id
-        WHERE p.investor_id = ?
-    `;
-    db.all(query, [investorId], callback);
-};
+        WHERE p.investor_id = '${investorId}';`,
 
+        (error, result) => {
+
+            if (error) {
+                callback(error, null);
+            } else {
+                console.log("Investor Holdings Fetched Successfully");
+                callback(null, result.rows);
+            }
+
+        }
+    );
+
+};
 const calculateNAV = (investorId, callback) => {
-    const query = `
-        SELECT 
+
+    client.query(
+        `SELECT 
             SUM(ph.total_units * nh.nav_value) AS net_worth
         FROM portfolio p
         JOIN portfolio_holdings ph
             ON p.portfolio_id = ph.portfolio_id
         JOIN nav_history nh
             ON ph.fund_id = nh.fund_id
-        WHERE p.investor_id = ?
-    `;
-    db.get(query, [investorId], callback);
+        WHERE p.investor_id = '${investorId}';`,
+
+        (error, result) => {
+
+            if (error) {
+                callback(error, null);
+            } else {
+                console.log("NAV Calculated Successfully");
+                callback(null, result.rows);
+            }
+
+        }
+    );
+
 };
 
 
